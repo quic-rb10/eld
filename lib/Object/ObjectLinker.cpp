@@ -3151,6 +3151,9 @@ bool ObjectLinker::createLTOObject(void) {
   std::vector<std::string> Options;
   processCodegenOptions(ThisConfig.options().codeGenOpts(), Conf, Options);
 
+  if (const auto &O = ThisConfig.options().getDwoDir())
+    Conf.DwoDir = *O;
+
   ThisBackend.AddLTOOptions(Options);
 
   if (LTOPlugin)
